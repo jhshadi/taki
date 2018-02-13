@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+    <head>
+
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+        <title>Welcome to TAKI</title>
+
+        <link href="assets/style/bootstrap.css" rel="stylesheet" type="text/css" />
+        <link href="assets/style/style.css" rel="stylesheet" type="text/css" />
+
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+        <script src="assets/js/bootstrap.min.js"></script>
+        <script src="assets/js/gamesLobbyPage.js"></script>
+
+    </head>
+    <body>
+
+        <div id="header"><img src="assets/img/TAKI_logo.png" width="200" height="100" alt="Taki logo" /></div>
+
+        <div class="container">
+
+            <div id="errorMsg-PlayerName"></div>
+
+            <div class="row">
+                <div class="col-sm-12">
+                    <input id="playerName" type="text" class="form-control" id="gameNameInput" placeholder="Player Name">
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-6">
+                    <h2 class="list-title">Waiting Games:</h2>
+
+                    <ul id="waitingGamesList" class="list-group"></ul>
+                </div>
+
+                <div class="col-sm-6">
+                    <h2 class="list-title">Active Games:</h2>
+
+                    <ul id="activeGamesList" class="list-group bold"></ul>  
+                </div>
+
+            </div>
+
+            <div class="row">
+                <div class="col-sm-12">
+                    <button id="refreshBtn" class="btn btn-sm btn-default btn-block" type="button" data-loading-text="Refreshing...">Refresh</button>
+                </div>
+            </div>
+
+            <div class="row"><div class="col-sm-12 row-cell-spaceing"></div></div>
+
+            <div class="panel panel-primary">
+                <div data-toggle="collapse" data-target="#create-new-game-panel-content" class="panel-heading clickable">
+                    <h3 class="panel-title bold"><span class="glyphicon glyphicon-plus"> </span>Creat new game</h3>
+                </div>
+                <div id="create-new-game-panel-content" class="collapse panel-body">
+                    <div class="container-fluid">
+
+                        <div class="row"><div class="col-sm-12"><div id="errorMsg-createGame"></div></div></div>
+
+                        <div class="row">
+                            <div class="col-sm-8">
+
+                                <form id="createGame-form" class="form-horizontal" role="form">
+                                    <div class="form-group">
+                                        <label for="gameNameInput" class="col-sm-2 control-label">Game Name</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" class="form-control" id="gameNameInput" placeholder="Game Name"  name="gameName">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="humanPlayersInput" class="col-sm-2 control-label">Human Players</label>
+                                        <div class="col-sm-10">
+                                            <select id="humanPlayersInput" class="form-control" name="humanPlayers">
+                                                <option value="1">1</option>
+                                                <option value="2">2</option>
+                                                <option value="3">3</option>
+                                                <option value="4">4</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="computerPlayersInput" class="col-sm-2 control-label">Computer Players</label>
+                                        <div class="col-sm-10">
+                                            <select id="computerPlayersInput" class="form-control" name="computerPlayers">
+                                                <option value="0">0</option>
+                                                <option value="1">1</option>
+                                                <option value="2">2</option>
+                                                <option value="3">3</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-sm-offset-2 col-sm-10">
+                                            <button type="submit" class="btn btn-primary" data-loading-text="Creating...">Create</button>
+                                        </div>
+                                    </div>
+                                </form> <!-- Create Game form end here -->
+
+                            </div>
+                            <div class="col-sm-4">
+
+                                <form id="createGameFromXml-form" class="form" role="form" action="/CreateGameFromXml" enctype="multipart/form-data" method="POST" target="upload_iframe">
+                                    <div class="form-group">
+                                        <label for="computerPlayersInput">Upload Xml File</label>
+                                        <input type="file" id="xmlFileInput" name="xmlFile">
+                                    </div>
+                                    <div class="form-group">
+                                        <button type="submit" class="btn btn-primary" data-loading-text="Creating...">Create Game From Xml</button>
+                                    </div>
+                                </form> <!-- Create Game From Xml form end here -->
+
+                                <iframe id="upload_iframe" name="upload_iframe"><iframe>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div> <!-- /container -->
+
+        <div class="loading small" style="width: 0px; height: 0px; overflow: hidden; margin: 0px"><div></div><h5>Loading...</h5></div>
+    </body>
+</html>

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+    <head>
+
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=480, height=800, initial-scale=0.60" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+        <title>Welcome to TAKI</title>
+
+        <link href="assets/style/bootstrap.css" rel="stylesheet" type="text/css" />
+        <link href="assets/style/style.css" rel="stylesheet" type="text/css" />
+
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+        <script src="assets/js/bootstrap.min.js"></script>
+        <script src="assets/js/takiPage.js"></script>
+
+        <script src="assets/js/jquery.nicescroll.min.js"></script>
+        <script src="assets/js/jquery.touchSwipe.min.js"></script>
+
+    </head>
+    <body class="bg-green" style="overflow: hidden;">
+
+        <div id="loadingBox" class="container text-center">
+            <div class="loading"><div></div><h5>Waiting for players to join the game...</h5></div>
+        </div> <!-- end of Loading Box -->
+
+        <div id="taki-board" class="container text-center" style="visibility: hidden;">
+
+            <div class="row">
+                <div class="col-xs-12 text-left">
+                    <button id="resign-button" type="button" class="btn btn-default btn-xs">Resign</button>
+                </div>
+            </div>  <!-- end of row -->
+
+
+            <div class="row">
+                <div id="player-top" class="col-xs-12"></div>
+            </div>  <!-- end of row -->
+
+            <div class="row"><div class="col-xs-12 row-cell-spaceing"></div></div>
+
+            <div class="row text-center">
+
+                <div id="player-left" class="col-xs-3"></div>
+
+                <div class="col-xs-6 nowarp">
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div id="stack-and-pile">
+                                <!-- Stack -->
+                                <div id="stack"><div class="card back clickable"><div></div><p id="stackText"></p></div></div>
+
+                                <!-- Pile -->
+                                <div id="pile"><div class="card invalid"><div></div></div></div>
+
+                                <!-- Log -->
+                                <div id="log-wrapper"><textarea id="log" rows="4" readonly></textarea></div>
+                            </div>
+
+                            <!-- Change Color Box -->
+                            <div id="changeColorBox" class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title bold"><span class="glyphicon glyphicon-adjust"></span> Change Color To:</h3>
+                                </div>
+
+                                <div id="changeColorBox-colors" class="panel-body"></div>
+                            </div>
+
+                            <!-- Message Box -->
+                            <div id="msgBox" class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title bold"><span class="glyphicon glyphicon-info-sign text-left"></span> <span id="msgBox-title"></span></h3>
+                                </div>
+                                <div class="panel-body">
+                                    <p id="msgBox-text"></p>
+                                    <button id="msgBox-btn" type="button" class="btn btn-primary btn-xs">OK</button>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div> <!-- end of row -->
+                </div>
+
+                <div id="player-right" class="col-xs-3"></div>
+
+            </div>  <!-- end of row -->
+
+            <div class="row"><div class="col-xs-12 row-cell-spaceing"></div></div>
+
+            <div class="row">
+                <div id="current-player" class="col-xs-12">
+                    <div class=" playerUI panel panel-default">
+                        <div class="panel-heading">
+                            <h4></h4>
+                        </div>
+
+                        <div id="playerDeck" class="panel-body"></div>
+                        <!-- Player Deck ends here -->
+
+                    </div>
+                </div>
+            </div>
+        </div> <!-- /container -->
+
+    </body>
+</html>

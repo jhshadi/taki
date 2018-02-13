@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+    <head>
+
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+        <title>Connect To Taki Server</title>
+
+        <link href="assets/style/bootstrap.css" rel="stylesheet" type="text/css" />
+        <link href="assets/style/style.css" rel="stylesheet" type="text/css" />
+
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+        <script src="assets/js/jquery.cookie.js"></script>
+
+        <script src="assets/js/bootstrap.min.js"></script>
+        <script src="assets/js/connectPage.js"></script>
+
+    </head>
+    <body>
+
+        <div id="header"><img src="assets/img/TAKI_logo.png" width="200" height="100" alt="Taki logo" /></div>
+
+        <div class="container">
+            
+            <div id="errorMsg"></div>
+            
+            <form class="form-signin" role="form" action="/Connect">
+                <h2 class="form-signin-heading">Connect to server</h2>
+                <input id="serverAddress" name="address" type="text" class="form-control" placeholder="Address" required >
+                <input id="serverPort" name="port" type="text" class="form-control" placeholder="Port" required > 
+                <button class="btn btn-lg btn-primary btn-block" type="submit" data-loading-text="Connecting...">Connect</button>
+            </form>
+            
+        </div> <!-- /container -->
+
+    </body>
+</html>

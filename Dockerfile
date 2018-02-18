@@ -2,8 +2,8 @@ FROM hypriot/rpi-java:latest
 
 WORKDIR /home/
 
-RUN apt-get update && apt-get install -y \
-  git
+RUN apt-get update && apt-get install -y git
+RUN update-ca-certificates -f
 
 RUN git clone https://github.com/jhshadi/taki.git
 

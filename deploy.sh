@@ -5,8 +5,8 @@ CONTAINER_NAME="taki"
 DOCKER_IMAGE="jhshadi/$CONTAINER_NAME"
 
 echo "Cleaning old '$CONTAINER_NAME' container"
-docker stop home-control
-docker rm home-control
+docker stop ${CONTAINER_NAME}
+docker rm ${CONTAINER_NAME}
 
 echo "Building '$DOCKER_IMAGE' image"
 docker build -t ${DOCKER_IMAGE} .

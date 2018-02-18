@@ -1,3 +1,13 @@
+apply plugin: 'java'
+apply plugin: 'idea'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'application'
+
+group = 'jhshadi.com'
+version = '1.0.0'
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
 buildscript {
 	ext {
 		springBootVersion = '1.5.10.RELEASE'
@@ -9,20 +19,6 @@ buildscript {
 		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
 	}
 }
-
-apply plugin: 'java'
-apply plugin: 'idea'
-apply plugin: 'org.springframework.boot'
-
-jar {
-	baseName = 'taki'
-	version =  '0.1.0'
-}
-
-group = 'jhshadi.com'
-version = '0.0.1-SNAPSHOT'
-sourceCompatibility = 1.8
-targetCompatibility = 1.8
 
 repositories {
 	mavenCentral()

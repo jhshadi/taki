@@ -2,7 +2,6 @@ FROM arm64v8/openjdk:8
 
 WORKDIR /home/
 
-RUN update-ca-certificates -f
 RUN apt-get update && apt-get install -y git
 RUN git clone https://github.com/jhshadi/taki.git
 

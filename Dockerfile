@@ -1,4 +1,4 @@
-FROM arm64v8/openjdk:8
+FROM arm32v7/openjdk:8
 
 WORKDIR /home/
 

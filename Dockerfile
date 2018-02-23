@@ -1,4 +1,4 @@
-FROM hypriot/rpi-java:latest
+FROM openjdk:8
 
 WORKDIR /home/
 

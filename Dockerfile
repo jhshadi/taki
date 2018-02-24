@@ -7,4 +7,5 @@ WORKDIR /home/taki
 RUN ./gradlew deploy
 
 WORKDIR /home/taki/deploy/
-ENTRYPOINT "./home/taki/deploy/bin/taki --server.port=${PORT} -J-Xms128M -J-Xmx128M"
+ENTRYPOINT ["./bin/taki"]
+CMD ["--server.port=${PORT}", "-J-Xms128M", "-J-Xmx128M"]

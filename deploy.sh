@@ -12,4 +12,4 @@ echo "Building '$DOCKER_IMAGE' image"
 docker build -t ${DOCKER_IMAGE} .
 
 echo "Starting '$CONTAINER_NAME' container"
-docker run -d --net=host -e PORT="$PORT" --name=${CONTAINER_NAME} ${DOCKER_IMAGE}
+docker run -d --net=host -e PORT="$PORT" --restart unless-stopped --name=${CONTAINER_NAME} ${DOCKER_IMAGE}

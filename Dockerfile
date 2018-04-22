@@ -3,7 +3,7 @@ FROM arm32v7/openjdk:8
 ENV PORT 7080
 ENV WORKING_DIR /home
 
-COPY ./* ${WORKING_DIR}/taki
+COPY ./* ${WORKING_DIR}/taki/
 
 WORKDIR ${WORKING_DIR}/taki
 RUN ./gradlew deploy

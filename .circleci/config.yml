@@ -3,7 +3,7 @@ jobs:
   test-java:
     docker:
       - image: cimg/openjdk:8.0
-    resource_class: arm.medium
+    resource_class: small
     steps:
       - checkout
       - run:

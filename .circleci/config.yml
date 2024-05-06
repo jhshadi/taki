@@ -1,6 +1,10 @@
 version: 2.1
+
+orbs:
+  kubernetes: circleci/kubernetes@1
+
 jobs:
-  test-java:
+  test:
     docker:
       - image: cimg/openjdk:8.0
     resource_class: small
@@ -24,20 +28,68 @@ jobs:
       - store_artifacts:
           path: build/reports
 
-  deploy:
-    # This is an example deploy job, not actually used by the workflow
+  publish:
     docker:
-      - image: cimg/base:stable
+      - image: cimg/openjdk:8.0
+    resource_class: arm.medium
     steps:
-      # Replace this with steps to deploy to users
+      - checkout
+      - setup_remote_docker
       - run:
-          name: deploy
-          command: '#e.g. ./deploy.sh'
+          name: Calculate cache key
+          command: |-
+            find . -name 'pom.xml' -o -name 'gradlew*' -o -name '*.gradle*' | \
+                    sort | xargs cat > /tmp/CIRCLECI_CACHE_KEY
+      - restore_cache:
+          key: cache-{{ checksum "/tmp/CIRCLECI_CACHE_KEY" }}
+      - run:
+          name: Prepare Application Distribution
+          command: ./gradlew installDist
+      - save_cache:
+          key: cache-{{ checksum "/tmp/CIRCLECI_CACHE_KEY" }}
+          paths:
+            - ~/.gradle/caches
+      - run:
+          name: Build Image Tag Environment Variable
+          command: |
+            echo "export DOCKER_IMAGE_TAG=${CIRCLE_PROJECT_REPONAME}_0.0.<< pipeline.number >>" >> "$BASH_ENV"
+            echo "export DOCKER_IMAGE_TAG_LATEST=${CIRCLE_PROJECT_REPONAME}_latest" >> "$BASH_ENV"
+      - run:
+          name: Build Image
+          command: docker build -t ${DOCKERHUB_USERNAME}/${DOCKERHUB_REGISTRY}:${DOCKER_IMAGE_TAG} -t ${DOCKERHUB_USERNAME}/${DOCKERHUB_REGISTRY}:${DOCKER_IMAGE_TAG_LATEST} .
+      - run:
+          command: |
+            echo ${DOCKERHUB_PASSWORD} | docker login -u ${DOCKERHUB_USERNAME} --password-stdin
+            docker push --all-tags ${DOCKERHUB_USERNAME}/${DOCKERHUB_REGISTRY}
+          name: Publish Image
+
+  deploy:
+    docker:
+      - image: cimg/deploy:2024.03.1
+    resource_class: small
+    steps:
+      - run:
+          name: Deploy
+          command: echo "coming soon..."
 
 workflows:
-  build-and-test:
+  build-and-publish:
     jobs:
-      - test-java
-    # - deploy:
-    #     requires:
-    #       - test-java
+      #- test
+      - publish:
+          name: Build and Publish Image
+          context:
+            - docker-hub-creds
+      #requires:
+      #- test 
+      - hold:
+          name: Approve deployment
+          type: approval
+          requires:
+            - Build and Publish Image
+      - deploy:
+          name: Deploy
+          context:
+            - docker-hub-creds
+          requires:
+            - Approve deployment

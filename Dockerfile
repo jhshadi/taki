@@ -1,13 +1,12 @@
-FROM arm32v7/openjdk:8
+FROM eclipse-temurin:17-jre
 
-ENV PORT 7080
-ENV WORKING_DIR /home
+ENV PORT 9000
+ENV WORKING_DIR /opt/app
 
-COPY ./* ${WORKING_DIR}/taki/
+RUN mkdir ${WORKING_DIR}
+COPY ./build/install/* ${WORKING_DIR}
 
-WORKDIR ${WORKING_DIR}/taki
-RUN ./gradlew deploy
+WORKDIR ${WORKING_DIR}
 
-WORKDIR ${WORKING_DIR}/taki/deploy/
 ENTRYPOINT ["./bin/taki"]
 CMD ["--server.port=${PORT}", "-J-Xms128M", "-J-Xmx128M"]

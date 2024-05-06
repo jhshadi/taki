@@ -3,6 +3,7 @@ jobs:
   test-java:
     docker:
       - image: cimg/openjdk:8.0
+    resource_class: arm.medium
     steps:
       - checkout
       - run:
@@ -22,6 +23,7 @@ jobs:
             - ~/.gradle/caches
       - store_artifacts:
           path: build/reports
+
   deploy:
     # This is an example deploy job, not actually used by the workflow
     docker:
@@ -31,6 +33,7 @@ jobs:
       - run:
           name: deploy
           command: '#e.g. ./deploy.sh'
+
 workflows:
   build-and-test:
     jobs:

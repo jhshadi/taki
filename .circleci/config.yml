@@ -79,9 +79,8 @@ jobs:
       - kubernetes/create-or-update-resource:
           get-rollout-status: true
           resource-file-path: k8/${CIRCLE_PROJECT_REPONAME}.yaml
-          resource-name: kustomization/${CIRCLE_PROJECT_REPONAME}
+          resource-name: deployment/taki-deployment
           show-kubectl-command: true
-          dry-run: client
 
 workflows:
   build-and-publish:

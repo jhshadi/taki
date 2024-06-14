@@ -1,8 +1,8 @@
-apiVersion: networking.k8s.io/v1beta1
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: ingress-taki
-  kubernetes.io/ingress.class: "nginx"
+  name: taki-ingress
+  namespace: taki
 spec:
   ingressClassName: nginx
   rules:
@@ -11,5 +11,7 @@ spec:
         paths:
           - path: /
             backend:
-              serviceName: taki-app
-              servicePort: 9000
+              service:
+                name: taki-service
+                port:
+                  number: 9000

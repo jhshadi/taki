@@ -43,14 +43,14 @@ jobs:
       - restore_cache:
           key: cache-{{ checksum "/tmp/CIRCLECI_CACHE_KEY" }}
       - run:
-          name: Prepare Application Distribution
+          name: Build Application
           command: ./gradlew installDist
       - save_cache:
           key: cache-{{ checksum "/tmp/CIRCLECI_CACHE_KEY" }}
           paths:
             - ~/.gradle/caches
       - run:
-          name: Build Image Tag Environment Variable
+          name: Init Image Tag Environment Variable
           command: |
             echo "export DOCKER_IMAGE_TAG=${CIRCLE_PROJECT_REPONAME}_0.0.<< pipeline.number >>" >> "$BASH_ENV"
             echo "export DOCKER_IMAGE_TAG_LATEST=${CIRCLE_PROJECT_REPONAME}_latest" >> "$BASH_ENV"
@@ -65,12 +65,23 @@ jobs:
 
   deploy:
     docker:
-      - image: cimg/deploy:2024.03.1
+      - image: cimg/base:2024.06
     resource_class: small
     steps:
+      - checkout
+      - kubernetes/install-kubectl:
+          kubectl-version: 1.30.1
+      - kubernetes/install-kubeconfig:
+          kubeconfig: KUBECONFIG_DATA
       - run:
-          name: Deploy
-          command: echo "coming soon..."
+          name: K8 Build Kustomize App Manifest
+          command: kubectl kustomize k8 -o k8/${CIRCLE_PROJECT_REPONAME}.yaml
+      - kubernetes/create-or-update-resource:
+          get-rollout-status: true
+          resource-file-path: k8/${CIRCLE_PROJECT_REPONAME}.yaml
+          resource-name: kustomization/${CIRCLE_PROJECT_REPONAME}
+          show-kubectl-command: true
+          dry-run: client
 
 workflows:
   build-and-publish:
@@ -81,7 +92,7 @@ workflows:
           context:
             - docker-hub-creds
       #requires:
-      #- test 
+      #- test
       - hold:
           name: Approve deployment
           type: approval
@@ -90,6 +101,6 @@ workflows:
       - deploy:
           name: Deploy
           context:
-            - docker-hub-creds
+            - k8-cluster
           requires:
             - Approve deployment

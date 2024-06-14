@@ -4,6 +4,7 @@ resources:
   - deployment.yaml
   - service.yaml
   - namespace.yaml
+  - ingress.yaml
 namespace: taki
 images:
   - name: jhshadi/my-apps

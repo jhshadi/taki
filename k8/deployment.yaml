@@ -33,3 +33,5 @@ spec:
             limits:
               memory: "256M"
               cpu: "500m"
+      imagePullSecrets:
+        - name: regcred

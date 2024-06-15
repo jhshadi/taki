@@ -1,4 +1,4 @@
-FROM eclipse-temurin:17-jre
+FROM eclipse-temurin:11-jre
 
 ENV PORT 9000
 ENV WORKING_DIR /opt/app

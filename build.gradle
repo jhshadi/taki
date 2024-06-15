@@ -36,15 +36,3 @@ distributions {
         }
     }
 }
-
-task copyTar(type: Copy) {
-    def tarFile = file("${project.projectDir}/build/distributions/taki-${version}.tar")
-    def outputDir = file("${project.projectDir}/deploy/")
-
-    from tarTree(tarFile)
-    into outputDir
-}
-
-task deploy(type: GradleBuild) {
-    tasks = ['distTar', 'copyTar']
-}

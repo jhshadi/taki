@@ -33,7 +33,8 @@ jobs:
       - image: cimg/openjdk:8.0
     resource_class: arm.medium
     steps:
-      - checkout
+      - checkout:
+          path: ${CIRCLE_PROJECT_REPONAME}
       - setup_remote_docker
       - run:
           name: Calculate cache key

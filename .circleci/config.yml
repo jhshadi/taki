@@ -78,8 +78,11 @@ jobs:
           command: kubectl kustomize k8 -o k8/${CIRCLE_PROJECT_REPONAME}.yaml
       - kubernetes/create-or-update-resource:
           get-rollout-status: true
+          watch-rollout-status: true
+          watch-timeout: 2m
           resource-file-path: k8/${CIRCLE_PROJECT_REPONAME}.yaml
-          resource-name: deployment/taki-deployment
+          resource-name: deployment/${CIRCLE_PROJECT_REPONAME}-deployment
+          namespace: ${CIRCLE_PROJECT_REPONAME}
           show-kubectl-command: true
 
 workflows:

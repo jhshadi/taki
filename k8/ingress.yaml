@@ -3,8 +3,14 @@ kind: Ingress
 metadata:
   name: taki-ingress
   namespace: taki
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-production
 spec:
   ingressClassName: nginx
+  tls:
+    - hosts:
+        - "taki.jhshadi.dev"
+      secretName: cert-taki-https-secret
   rules:
     - host: taki.jhshadi.dev
       http:

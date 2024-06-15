@@ -77,13 +77,14 @@ jobs:
           name: K8 Build Kustomize App Manifest
           command: kubectl kustomize k8 -o k8/${CIRCLE_PROJECT_REPONAME}.yaml
       - kubernetes/create-or-update-resource:
-          get-rollout-status: true
-          watch-rollout-status: true
-          watch-timeout: 2m
           resource-file-path: k8/${CIRCLE_PROJECT_REPONAME}.yaml
-          resource-name: deployment/${CIRCLE_PROJECT_REPONAME}-deployment
-          namespace: ${CIRCLE_PROJECT_REPONAME}
           show-kubectl-command: true
+#      - kubernetes/get-rollout-status:
+#          resource-name: deployment/${CIRCLE_PROJECT_REPONAME}-deployment
+#          namespace: ${CIRCLE_PROJECT_REPONAME}
+#          watch-rollout-status: true
+#          watch-timeout: 1m
+#          show-kubectl-command: true
 
 workflows:
   build-and-publish:

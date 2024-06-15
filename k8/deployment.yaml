@@ -23,6 +23,7 @@ spec:
       containers:
         - name: taki-app
           image: jhshadi/my-apps
+          imagePullPolicy: Always
           ports:
             - name: http
               containerPort: 9000

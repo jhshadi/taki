@@ -9,4 +9,4 @@ namespace: taki
 images:
   - name: jhshadi/my-apps
     newName: jhshadi/my-apps
-    newTag: taki_latest
+    newTag: ${CIRCLE_PROJECT_REPONAME}_0.0.${CIRCLECI_PIPELINE_NUMBER}

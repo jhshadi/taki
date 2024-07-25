@@ -35,5 +35,22 @@ spec:
             limits:
               memory: "256M"
               cpu: "500m"
+          livenessProbe:
+            httpGet:
+              path: /
+              port: http
+            timeoutSeconds: 10
+            failureThreshold: 3
+#          readinessProbe:
+#            httpGet:
+#              path: /
+#              port: http
+          startupProbe:
+            httpGet:
+              path: /
+              port: http
+            initialDelaySeconds: 30
+            periodSeconds: 10
+            failureThreshold: 30 # max of 5 min
       imagePullSecrets:
         - name: regcred

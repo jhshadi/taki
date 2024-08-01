@@ -142,33 +142,10 @@ $(document).on("ready", function() {
         return false;
     }
 
-    function createGameFromXml(event) {
-        var form = $(this);
-        form.find('button').button('loading');
-
-        return true;
-    }
-
-    function onFileUploadComplete() {
-        var span = $(this).contents().find('span');
-
-        if (span.attr('success') === "true") {
-            createAlertMsg('#errorMsg-createGame', true, "Game '" + span.text() + "' created successfully!");
-            getGamesLists();
-        }
-        else {
-            createAlertMsg('#errorMsg-createGame', false, span.text());
-        }
-
-        $('#createGameFromXml-form button').button('reset');
-    }
-
     // Events
     $('#refreshBtn').on('click', getGamesLists);
     $('#createGame-form').on('submit', createGame);
-    $('#createGameFromXml-form').on('submit', createGameFromXml);
-    $("#upload_iframe").on('load', onFileUploadComplete);
-    
+
     // Utils Functions
     function createAlertMsg(divId, isSuccess, msg) {
         var alertMsg = "<div class='alert";

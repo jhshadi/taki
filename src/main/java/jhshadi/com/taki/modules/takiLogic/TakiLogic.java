@@ -3,10 +3,7 @@ package jhshadi.com.taki.modules.takiLogic;
 import jhshadi.com.taki.modules.takiLogic.exceptions.*;
 import jhshadi.com.taki.modules.takiLogic.takiEnums.CardColors;
 import jhshadi.com.taki.modules.takiLogic.takiEnums.CardTypes;
-import org.xml.sax.SAXException;
 
-import javax.xml.bind.JAXBException;
-import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -441,16 +438,6 @@ public class TakiLogic {
         return result;
     }
 
-// TODO: remove xml
-//    public boolean saveGameToXmlFile(String xmlFileName) {
-//        boolean isSaved = false;
-//
-//        XMLManager.saveGameToXmlFile(xmlFileName, this);
-//        isSaved = true;
-//
-//        return isSaved;
-//    }
-
     public void quit() {
         this.gameOver = true;
     }
@@ -468,18 +455,6 @@ public class TakiLogic {
     }
 
     public static abstract class LogicFactory {
-
-// TODO: remove xml
-//        public static TakiLogic create(String xmlString) throws InvalidXmlFile {
-//            TakiLogic newTakiLogic;
-//            try {
-//                newTakiLogic = XMLManager.loadGameFromXmlFile(xmlString);
-//            } catch (InvalidXmlFile | JAXBException | SAXException | FileNotFoundException ex) {
-//                throw new InvalidXmlFile();
-//            }
-//
-//            return newTakiLogic;
-//        }
 
         public static TakiLogic create() {
             TakiLogic newTakiLogic = new TakiLogic();

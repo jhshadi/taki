@@ -81,7 +81,7 @@ jobs:
       - kubernetes/create_or_update_resource:
           kustomize: true
           envsubst: true
-          resource_file_path: k8/kustomization.yaml
+          resource_file_path: k8
           show_kubectl_command: true
 #      - kubernetes/get-rollout-status:
 #          resource-name: deployment/${CIRCLE_PROJECT_REPONAME}-deployment

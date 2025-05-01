@@ -75,13 +75,13 @@ jobs:
           kubectl_version: v1.30.1
       - kubernetes/install_kubeconfig:
           kubeconfig: KUBECONFIG_DATA
-      # - run:
-          # name: K8 Build Kustomize App Manifest
-          # command: kubectl kustomize k8 -o k8/${CIRCLE_PROJECT_REPONAME}.yaml
+      - run:
+          name: K8 Build Kustomize App Manifest
+          command: kubectl kustomize k8 -o k8/${CIRCLE_PROJECT_REPONAME}.yaml
       - kubernetes/create_or_update_resource:
           kustomize: true
           envsubst: true
-          resource_file_path: k8
+          resource_file_path: k8/kustomization.yaml
           show_kubectl_command: true
 #      - kubernetes/get-rollout-status:
 #          resource-name: deployment/${CIRCLE_PROJECT_REPONAME}-deployment

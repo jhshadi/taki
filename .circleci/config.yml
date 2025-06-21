@@ -65,7 +65,7 @@ jobs:
 
   deploy:
     docker:
-      - image: cimg/base:2024.06
+      - image: cimg/base:2025.06
     resource_class: small
     environment:
       CIRCLECI_PIPELINE_NUMBER: << pipeline.number >>
